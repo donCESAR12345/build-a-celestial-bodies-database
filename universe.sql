@@ -169,8 +169,8 @@ CREATE TABLE public.planet (
     planet_id integer NOT NULL,
     name character varying(100) NOT NULL,
     description character varying(500),
-    size integer,
-    mass numeric,
+    radius_in_earth_radius integer,
+    mass_in_earth_masses numeric,
     type text,
     star_id integer NOT NULL,
     has_life boolean NOT NULL
@@ -302,6 +302,28 @@ INSERT INTO public.galaxy VALUES (6, 'NGC 7319', 'NGC 7319 is a highly distorted
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.moon VALUES (1, 'Moon', 'The Moon is the only natural satellite of the Earth. Its diameter is about one-quarter the diameter of the Earth (comparable to the width of Australia). The Moon is the fifth largest satellite in the Solar System. It is larger than any of the known dwarf planets and is the largest (and most massive) satellite relative to its parent planet.', 1737, 0.0123, 'Natural satellite', 2, false);
+INSERT INTO public.moon VALUES (2, 'Phobos', 'Phobos (/ˈfoʊbɒs/; systematic designation: Mars I) is the innermost and larger of the two natural satellites of Mars, the other being Deimos. The two moons were discovered in 1877 by American astronomer Asaph Hall. Phobos is named after the Greek deity Phobos, a son of Ares (Mars) and twin brother of Deimos.', 11, 1.784, 'Natural satellite', 3, false);
+INSERT INTO public.moon VALUES (3, 'Deimos', 'Deimos /ˈdaɪməs/ (systematic designation: Mars II) is the smaller and outermost of the two natural satellites of Mars, the other being Phobos. Of similar composition to C and D-type asteroids, Deimos has a mean radius of 6.2 km (3.9 mi) and takes 30.3 hours to orbit Mars.', 6, 0.2471, 'Natural satellite', 3, false);
+INSERT INTO public.moon VALUES (4, 'Io', 'Io (/ˈaɪ.oʊ/), or Jupiter I, is the innermost and third-largest of the four Galilean moons of the planet Jupiter. Slightly larger than the moon of the Earth, Io is the fourth-largest moon in the Solar System, has the highest density of any moon, the strongest surface gravity of any moon, and the lowest amount of water (by atomic ratio) of any known astronomical object in the Solar System', 1821, 0.015, 'Natural satellite', 5, false);
+INSERT INTO public.moon VALUES (6, 'Europa', NULL, NULL, NULL, NULL, 5, false);
+INSERT INTO public.moon VALUES (7, 'Ganymede', NULL, NULL, NULL, NULL, 5, false);
+INSERT INTO public.moon VALUES (8, 'Callisto', NULL, NULL, NULL, NULL, 5, false);
+INSERT INTO public.moon VALUES (9, 'Ananke', NULL, NULL, NULL, NULL, 5, false);
+INSERT INTO public.moon VALUES (10, 'Titan', NULL, NULL, NULL, NULL, 6, false);
+INSERT INTO public.moon VALUES (11, 'Rhea', NULL, NULL, NULL, NULL, 6, false);
+INSERT INTO public.moon VALUES (12, 'Enceladus', NULL, NULL, NULL, NULL, 6, false);
+INSERT INTO public.moon VALUES (13, 'Nereid', NULL, NULL, NULL, NULL, 9, false);
+INSERT INTO public.moon VALUES (14, 'Proteus', NULL, NULL, NULL, NULL, 9, false);
+INSERT INTO public.moon VALUES (15, 'Larissa', NULL, NULL, NULL, NULL, 9, false);
+INSERT INTO public.moon VALUES (16, 'Naiad', NULL, NULL, NULL, NULL, 9, false);
+INSERT INTO public.moon VALUES (17, 'Thalassa', NULL, NULL, NULL, NULL, 9, false);
+INSERT INTO public.moon VALUES (18, 'Triton', NULL, NULL, NULL, NULL, 9, false);
+INSERT INTO public.moon VALUES (19, 'Miranda', NULL, NULL, NULL, NULL, 7, false);
+INSERT INTO public.moon VALUES (20, 'Ariel', NULL, NULL, NULL, NULL, 7, false);
+INSERT INTO public.moon VALUES (21, 'Umbriel', NULL, NULL, NULL, NULL, 7, false);
+INSERT INTO public.moon VALUES (22, 'Titania', NULL, NULL, NULL, NULL, 7, false);
+INSERT INTO public.moon VALUES (23, 'Oberon', NULL, NULL, NULL, NULL, 7, false);
 
 
 --
@@ -317,6 +339,9 @@ INSERT INTO public.planet VALUES (6, 'Saturn', 'Saturn is the sixth planet from 
 INSERT INTO public.planet VALUES (7, 'Uranus', 'Uranus is the seventh planet from the Sun. Its name is a reference to the Greek god of the sky, Uranus (Caelus), who, according to Greek mythology, was the great-grandfather of Ares (Mars), grandfather of Zeus (Jupiter) and father of Cronus (Saturn). It has the third-largest planetary radius and fourth-largest planetary mass in the Solar System.', 4, 14.536, 'Ice giant', 7, false);
 INSERT INTO public.planet VALUES (8, 'Venus', 'Venus is the second planet from the Sun. It is sometimes called Earth "sister" or "twin" planet as it is almost as large and has a similar composition. As an interior planet to Earth, Venus (like Mercury) appears in the sky of the Earth  never far from the Sun, either as morning star or evening star.', 1, 0.815, 'Terrestrial planet', 7, false);
 INSERT INTO public.planet VALUES (9, 'Neptune', 'Neptune is the eighth planet from the Sun and the farthest known solar planet. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the densest giant planet. It is 17 times the mass of Earth, and slightly more massive than its near-twin Uranus.', 4, 17.47, 'Ice giant', 7, false);
+INSERT INTO public.planet VALUES (13, 'Proxima Centauri D', 'Proxima Centauri d (also called Proxima d) is a candidate exoplanet orbiting the red dwarf star Proxima Centauri, the closest star to the Sun and part of the Alpha Centauri triple star system. Together with two other planets in the Proxima Centauri system, it is the closest known exoplanet to the Solar System, located approximately 4.2 light-years (1.3 parsecs; 40 trillion kilometres; 25 trillion miles) away in the constellation of Centaurus.', 1, 0.26, 'Exoplanet', 6, false);
+INSERT INTO public.planet VALUES (11, 'Proxima Centauri B', 'Proxima Centauri b (or Proxima b), sometimes referred to as Alpha Centauri Cb, is an exoplanet orbiting in the habitable zone of the red dwarf star Proxima Centauri, which is the closest star to the Sun and part of the triple star system Alpha Centauri.', 1, 1.07, 'Exoplanet', 6, false);
+INSERT INTO public.planet VALUES (12, 'Proxima Centauri C', 'Proxima Centauri c (also called Proxima c or Alpha Centauri Cc) is a controversial exoplanet candidate claimed to be orbiting the red dwarf star Proxima Centauri, which is the closest star to the Sun and part of a triple star system.', NULL, 7, 'Exoplanet', 6, false);
 
 
 --
@@ -350,14 +375,14 @@ SELECT pg_catalog.setval('public.galaxy_id_seq', 6, true);
 -- Name: moon_moon_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.moon_moon_id_seq', 1, false);
+SELECT pg_catalog.setval('public.moon_moon_id_seq', 23, true);
 
 
 --
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 10, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 13, true);
 
 
 --
